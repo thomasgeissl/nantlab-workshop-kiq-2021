@@ -2,7 +2,7 @@
 #include "./config.h"
 
 #include <Adafruit_NeoPixel.h>
-#include <Ultrasonic.h>
+#include "./Ultrasonic.h"
 
 
 class IO {
@@ -24,6 +24,7 @@ class IO {
       micLevel = analogRead(PIN_MIC);
     }
     void print() {
+      update();
       String message = "distance: ";
       message += distance;
       message += ", ";
@@ -66,6 +67,10 @@ class IO {
         strip.show(); // Update strip with new contents
         delay(wait);  // Pause for a moment
       }
+    }
+    int getDistance(){
+      update();
+      return distance;
     }
 
     Adafruit_NeoPixel strip;
